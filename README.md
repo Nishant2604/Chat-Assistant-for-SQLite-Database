@@ -84,18 +84,6 @@ Future Improvements
 Develop a web UI with React.
 Improve natural language processing with NLP libraries like NLTK or spaCy.
 Implement authentication for secure API access.
-License
-MIT License - Free to use and modify.
-
-Author
-[Your Name] - [Your Contact Info]
-
-
----
-
-This **README.md** provides a detailed setup guide, API documentation, and deployment instructions. 
-
-Would you like me to tweak anything or add more details?
 
 
 
