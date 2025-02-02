@@ -1,89 +1,102 @@
-1. # Chat Assistant for SQLite Database  
+Chatbot SQL Assistant
+This is a Flask-based chatbot that translates natural language queries into SQL queries and retrieves relevant data from a SQLite database. Initially, the assistant worked via API endpoints using Postman, but a Simple UI Interface was added to enhance user interaction instead of using Postman.
 
-## Overview  
-This is a simple chat assistant built using **Flask** and **SQLite**. It accepts natural language queries, converts them into SQL queries, retrieves relevant data from the database, and returns structured responses.  
+Features
+1)Converts user input into SQL queries.
 
----
+2)Extracts key entities such as department names and dates.
 
-## **Features**  
-- Accepts natural language queries  
-- Retrieves relevant data from an SQLite database  
-- Handles errors gracefully
-- Deployable on Render, Railway, or any cloud provider
+3)Executes SQL queries on a SQLite database and returns results.
 
----
+4)Interactive Web UI for user-friendly query submission.
 
-## **Setup Instructions**  
+Stages of Development and Respective Files
+A) Database setup
 
-### **1. Clone the Repository**  
-```bash
-git clone https://github.com/your-username/chat-assistant-sqlite.git
-cd chat-assistant-sqlite
+setup_db.ipynb : Establishes connection with the SQLite database, creates the employees and departments tables, inserts sample records into them.
 
-2. Create a Virtual Environment (Optional but Recommended)
+company.db: SQLite database used for storing employee data.
 
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate     # On Windows
+B) API-Based Query Handling
 
-3. Install Dependencies
+app.py: Main Flask application handling API requests.
 
-pip install -r requirements.txt
+query_handler.py and chatbot.ipynb: Contains logic to convert natural language into SQL queries.
 
-4. Initialize the Database
-Run the following Python script to create the SQLite database and populate it with sample data:
+C) requirements.txt: Lists dependencies, including spaCy and Flask.
 
-python setup_database.py
+D) Simple UI Integration
 
-5. Run the Flask Server
+templates/index.html: Frontend for user interaction.
 
-python chatbot.py
+app.py: Updated to serve the UI and handle form submissions.
 
- 
-API Endpoints
-1. Chat Endpoint
-URL: /chat
-Method: POST
-Description: Accepts a JSON query, processes it, and returns a response.
-Request Format:
+How It Works
+The user enters a query in natural language (e.g., "What is the total salary expense of the Sales and HR departments?").
 
-{
-    "query": "Who is the manager of the Sales department?"
-}
+The assistant processes the query and extracts key entities (departments, date, etc.).
 
-Response Format:
+It constructs an appropriate SQL query based on predefined rules.
 
-{
-    "response": [[ "Alice"]]
-}
-Example Queries & Responses
-User Query	Expected Response
-"Show me all employees in the Sales department."	["Alice"]
-"Who is the manager of the Engineering department?"	["Bob"]
-"List all employees hired after 2021-01-01."	["Alice", "Charlie"]
-What is the total salary expense for the Marketing department? 	[60000]
+The query is executed against the SQLite database.
 
-Deployment
-This project can be deployed on Render, Railway, or Heroku.
+The result is displayed on the UI.
 
-1. Prepare for Deployment
-Ensure you have the following files in your project:
+Steps to Run the Project Locally
+Clone the Repository
+git clone cd chatbot-sql-assistant
 
-requirements.txt
-Procfile
-2. Deploy on Render
-Push your code to GitHub.
-Navigate to Render.
-Click New Web Service and connect your repository.
-Set:
-Runtime: Python
-Build Command: pip install -r requirements.txt
-Start Command: gunicorn chatbot:app
-Deploy and obtain a live URL.
-Future Improvements
-Develop a web UI with React.
-Improve natural language processing with NLP libraries like NLTK or spaCy.
-Implement authentication for secure API access.
+Create a Virtual Environment
+python -m venv venv source venv/bin/activate # On macOS/Linux venv\Scripts\activate # On Windows
+
+Install Dependencies
+pip install -r requirements.txt python -m spacy download en_core_web_sm # Required for NLP processing
+
+Run the Application through the command prompt using
+python app.py
+
+The chatbot will be accessible at http://127.0.0.1:5000.
+
+Using the Simple UI Interface
+Open your browser and navigate to http://127.0.0.1:5000
+
+Enter a query in the text box.
+
+Click Submit to receive a response from the chatbot.
+
+Deployment on Render
+This project is deployed on Render. https://chatbot-qycg.onrender.com
+
+To deploy your own version:
+
+Push the latest changes to a GitHub repository.
+
+Create a new Web Service on Render.
+
+Set the Start Command to:
+
+gunicorn app:app
+
+Add environment variables if needed (e.g., database credentials).
+
+Deploy and access the UI via the Render URL.
+
+Known Limitations & Suggestions for Improvement
+Limitations
+Currently supports predefined query patterns.
+
+Doesn't handle complex queries with multiple conditions well.
+
+No authentication/authorization in place.
+
+Improvements
+Expand NLP processing for more flexible query understanding.
+
+Integrate a chatbot frontend for a more interactive experience.
+
+Support multiple databases beyond SQLite.
+
+Implement user authentication for security.
 
 
 
