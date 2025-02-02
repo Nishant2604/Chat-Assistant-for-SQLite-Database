@@ -2,6 +2,7 @@ Chatbot SQL Assistant
 This is a Flask-based chatbot that translates natural language queries into SQL queries and retrieves relevant data from a SQLite database. Initially, the assistant worked via API endpoints using Postman, but a Simple UI Interface was added to enhance user interaction instead of using Postman.
 
 Features
+
 1)Converts user input into SQL queries.
 
 2)Extracts key entities such as department names and dates.
